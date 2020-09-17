@@ -1,0 +1,12 @@
+def factorial(n, F):
+    if(n==1 or n==0):
+        return 1
+    elif(n==2):
+        return F*2
+    else:
+        F *= n
+        n -= 1
+        return factorial(n, F)
+
+n = int(input())
+print(factorial(n, 1))
