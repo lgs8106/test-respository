@@ -1,0 +1,47 @@
+from collections import deque
+count = 0
+queue = deque()
+
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+
+N, M = map(int, input().split())
+field = []
+for i in range(0, N):
+  a = list(map(int,input()))
+  field.append(a)
+print(field)
+
+
+def iceage(N, M, field):
+  global count
+  for i in range(0,N):
+    for j in range(0,M):
+      if field[i][j] == 0:
+        count += 1
+        print(i,j)
+        queue.append([i,j])
+        field[i][j] = 1
+        while queue:
+          a,b = queue.popleft()
+          if a != 0:
+            if field[a+dx[0]][b+dy[0]] == 0:
+              queue.append([a+dx[0],b+dy[0]])
+              field[a+dx[0]][b+dy[0]] = 1 
+          if a != N-1:  
+            if field[a+dx[1]][b+dy[1]] == 0:
+              queue.append([a+dx[1],b+dy[1]])
+              field[a+dx[1]][b+dy[1]] = 1
+          if b != 0:    
+            if field[a+dx[2]][b+dy[2]] == 0:
+              queue.append([a+dx[2],b+dy[2]])
+              field[a+dx[2]][b+dy[2]] = 1
+          if b != M-1:
+            if field[a+dx[3]][b+dy[3]] == 0:
+              queue.append([a+dx[3],b+dy[3]])
+              field[a+dx[3]][b+dy[3]] = 1 
+
+iceage(N,M,field)
+print(count)
+for i in field:
+  print(i)
